@@ -123,3 +123,14 @@ rotAboutAxisByAngle <- function(quat, axis, angleInDegrees){
   rotQuat <- quatNormalized(c(axis[1] * axisVals, axis[2] * axisVals, axis[3] * axisVals, cos(theta/2)))
   return(quatMultiply(rotQuat, quat))
 }
+
+angleBetweenQuaternions <- function(q1, q2){
+  w <- 4
+  conjQ1 <- quatConjugate(q1)
+  quatBetween <- quatMultiply(conjQ1, q2)
+  angleBetween <- acos(quatBetween[w]) * 360 / pi
+  if(angleBetween > 180){
+    angleBetween = -(360 - angleBetween)
+  }
+  return(angleBetween)
+}

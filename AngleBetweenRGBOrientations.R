@@ -20,14 +20,6 @@ rgbToProperZXZEuler <- function(rgb){
   return(euler(rgb[r] * p1AngleRange, rgb[g] * PAngleRange, rgb[b] * p2AngleRange) / 255)
 }
 
-angleBetweenQuaternions <- function(q1, q2){
-  w <- 4
-  conjQ1 <- quatConjugate(q1)
-  quatBetween <- quatMultiply(conjQ1, q2)
-  angleBetween <- acos(quatBetween[w]) * 360 / pi
-  return(angleBetween)
-}
-
 angleBetweenRGBs <- function(rgb1, rgb2){
   p1 <- 1
   P <- 2
@@ -52,7 +44,9 @@ angleBetweenRGBs <- function(rgb1, rgb2){
       unit <- rotAboutAxisByAngle(unit, c(0,1,0), (yRot - 1) * 90)
       testQ2 <- quatMultiply(q2, unit)
       angleBetween <- angleBetweenQuaternions(q1, testQ2)
-      minAngle <- min(minAngle, angleBetween)
+      # print(testQ2)
+      # print(angleBetween)
+      if(abs(angleBetween) < minAngle) minAngle <- abs(angleBetween)
     }
   }
   

@@ -1,14 +1,17 @@
 ```{r}
-source("DistanceBetweenRGBOrientations.R")
+source("AngleBetweenRGBOrientations.R")
 
 # Here is an example of how to use the angleBetweenRGBs function. Create 2 rgb arrays [0,255] and pass them into the function.
 # The angle in degrees between the 2 orientations is returned.
 
 
-rgb1 <- rgb(0,0,255)
-rgb2 <- rgb(0,255,255)
+rgb1 <- rgb(0,255/2, 255 / 10)
+rgb2 <- rgb(0, 255/2, 255 - 255 / 10)
 
-print(angleBetweenRGBs(rgb1, rgb2))
+rgb3 <- rgb(239,85,1)
+rgb4 <- rgb(240,72,238)
+
+print(angleBetweenRGBs(rgb3, rgb4))
 
 
 ```
