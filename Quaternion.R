@@ -4,11 +4,11 @@ quaternion <- function(x, y, z, w){
 }
 
 eulerZXZToQuat <- function(p1,P,p2){
-  if(P == 0){
-    return(c(0,0,0,0))
-  }
-  thetaPlus <- (p2 + p1)/2
-  thetaMinus <- (p2 - p1)/2
+  p1 <- p1 * pi / 180
+  P <- P * pi / 180
+  p2 <- p2 * pi / 180
+  thetaPlus <- (p1 + p2)/2
+  thetaMinus <- (p1 - p2)/2
   cP <- cos(P)
   ttP <- tan(thetaPlus)
   ttM <- tan(thetaMinus)
@@ -76,7 +76,7 @@ quatToEulerInDegreesZXZ <- function(quat){
   while(theta3 < 0) {
     theta3 <- theta3 + 2*pi
   }
-  result <- c(theta1, theta2, theta3) * (180 / pi)
+  result <- c(theta3, theta2, theta1) * (180 / pi)
   return(result)
 }
 
@@ -115,4 +115,11 @@ quatConjugate <- function(quat){
   z <- 3
   w <- 4
   return(quaternion(-quat[x], -quat[y], -quat[z], quat[w]))
+}
+
+rotAboutAxisByAngle <- function(quat, axis, angleInDegrees){
+  theta <- angleInDegrees * pi / 180
+  axisVals <- sin(theta/2)
+  rotQuat <- quatNormalized(c(axis[1] * axisVals, axis[2] * axisVals, axis[3] * axisVals, cos(theta/2)))
+  return(quatMultiply(rotQuat, quat))
 }
