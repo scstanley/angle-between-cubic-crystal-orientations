@@ -4,14 +4,23 @@ source("AngleBetweenRGBOrientations.R")
 # Here is an example of how to use the angleBetweenRGBs function. Create 2 rgb arrays where each element is on the range [0,255]. 
 # Pass them into the function. The unsigned angle in degrees between the 2 orientations is returned.
 
-
+# wrapping test
 rgb1 <- rgb(0,255/2, 255 / 10)
 rgb2 <- rgb(0, 255/2, 255 - 255 / 10)
 
+# JCube example with similar orientations
 rgb3 <- rgb(239,85,1)
 rgb4 <- rgb(240,72,238)
 
-print(angleBetweenRGBs(rgb3, rgb4))
+# shift along p1
+rgb5 <- rgb(0, 255 / 2, 0)
+rgb6 <- rgb(255 / 2, 255 / 2, 0)
+
+#degenerate!!
+rgb7 <- rgb(10 * 255 / 360, 0, 10 * 255 / 90)
+rgb8 <- rgb(5 * 255 / 360, 0, 15 * 255 / 360)
+
+print(angleBetweenRGBs(rgb7, rgb8))
 
 
 ```
