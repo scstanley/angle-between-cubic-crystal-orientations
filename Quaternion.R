@@ -1,8 +1,11 @@
 
+# Create a vector containing the components of a quaternion in the x, y, z, w format. This is mainly for appearance sake.
 quaternion <- function(x, y, z, w){
   return(c(x, y, z, w))  
 }
 
+# Converts intrinsic, proper Euler anlges in degrees in the Z-X-Z sequence to a rotation quaternion representing the same orientation.
+# Note: There are degenerate cases for P = 0 and P = pi.
 eulerZXZToQuat <- function(p1,P,p2){
   p1 <- p1 * pi / 180
   P <- P * pi / 180
@@ -21,6 +24,9 @@ eulerZXZToQuat <- function(p1,P,p2){
   return(quatNormalized(quaternion(x,y,z,w)))
 }
 
+# Converts the given quaternion to intrinsic, proper Euler angles in the Z-X-Z sequence. Note, the Euler angles are in degrees.
+# For a generic conversion method to any sequence of Euler angles, proper or not: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9648712/
+# Note, the algorithm describe in the link returns extrinsic Euler angles. Reverse the sequence of rotations to convert to intrinsic.
 quatToEulerInDegreesZXZ <- function(quat){
   x <- 1
   y <- 2
@@ -80,6 +86,7 @@ quatToEulerInDegreesZXZ <- function(quat){
   return(result)
 }
 
+# Returns the Hamiltonian product of the two given quaternions. For rotation quaternion, this will rotate q2 by q1.
 quatMultiply <- function(q1, q2){
   x <- 1
   y <- 2
@@ -95,6 +102,7 @@ quatMultiply <- function(q1, q2){
   return(quat)
 }
 
+# Returns a quaternion equal to the given quaternion where the magnitude is normalized to one. 
 quatNormalized <- function(quat){
   x <- quat[1]
   y <- quat[2]
@@ -109,6 +117,8 @@ quatNormalized <- function(quat){
   return(quat)
 }
 
+# Returns the conjugate of the given quaternion. This is equivalent to inverting the axis of rotation, thus, the x, y, z components of the given quaternion
+# are all multiplied by -1.
 quatConjugate <- function(quat){
   x <- 1
   y <- 2
@@ -117,6 +127,7 @@ quatConjugate <- function(quat){
   return(quaternion(-quat[x], -quat[y], -quat[z], quat[w]))
 }
 
+# Returns a quaternion equal to the given quaternion rotated about the given axis by the given number of degrees.
 rotAboutAxisByAngle <- function(quat, axis, angleInDegrees){
   theta <- angleInDegrees * pi / 180
   axisVals <- sin(theta/2)
@@ -124,6 +135,7 @@ rotAboutAxisByAngle <- function(quat, axis, angleInDegrees){
   return(quatMultiply(rotQuat, quat))
 }
 
+# Returns the signed angle between the two given quaternions on the range (-180, 180].
 angleBetweenQuaternions <- function(q1, q2){
   w <- 4
   conjQ1 <- quatConjugate(q1)

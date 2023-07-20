@@ -8,7 +8,7 @@ source("AngleBetweenRGBOrientations.R")
 rgb1 <- rgb(0,255/2, 255 / 10)
 rgb2 <- rgb(0, 255/2, 255 - 255 / 10)
 
-# JCube example with similar orientations
+# Symmetrically similar cubic orientations
 rgb3 <- rgb(239,85,1)
 rgb4 <- rgb(240,72,238)
 
