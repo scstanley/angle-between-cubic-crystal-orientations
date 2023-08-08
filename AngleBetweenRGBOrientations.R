@@ -53,7 +53,7 @@ angleBetweenRGBs <- function(rgb1, rgb2){
       angleBetween <- angleBetweenQuaternions(q1, testQ2)
       # print(testQ2)
       # print(angleBetween)
-      if(abs(angleBetween) < minAngle) minAngle <- abs(angleBetween)
+      if(abs(angleBetween) < abs(minAngle)) minAngle <- angleBetween
     }
   }
   
