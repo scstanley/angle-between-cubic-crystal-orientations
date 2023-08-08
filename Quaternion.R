@@ -141,7 +141,7 @@ angleBetweenQuaternions <- function(q1, q2){
   conjQ1 <- quatConjugate(q1)
   quatBetween <- quatMultiply(conjQ1, q2)
   quatBetween <- quatNormalized(quatBetween)
-  angleBetween <- acos(quatBetween[w]) * 180 / pi
+  angleBetween <- 2 * acos(quatBetween[w]) * 180 / pi
   if(angleBetween > 180){
     angleBetween = -(360 - angleBetween)
   }

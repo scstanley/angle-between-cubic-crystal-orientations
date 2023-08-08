@@ -51,8 +51,6 @@ angleBetweenRGBs <- function(rgb1, rgb2){
       unit <- rotAboutAxisByAngle(unit, c(0,1,0), (yRot - 1) * 90)
       testQ2 <- quatMultiply(q2, unit)
       angleBetween <- angleBetweenQuaternions(q1, testQ2)
-      # print(testQ2)
-      # print(angleBetween)
       if(abs(angleBetween) < abs(minAngle)) minAngle <- angleBetween
     }
   }
