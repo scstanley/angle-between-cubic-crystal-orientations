@@ -20,7 +20,10 @@ rgb6 <- rgb(255 / 2, 255 / 2, 0)
 rgb7 <- rgb(10 * 255 / 360, 0, 10 * 255 / 90)
 rgb8 <- rgb(5 * 255 / 360, 0, 15 * 255 / 360)
 
-print(angleBetweenRGBs(rgb7, rgb8))
+#equal
+rgb9 <- rgb(1,1,1)
+
+print(angleBetweenRGBs(rgb2, rgb1))
 
 
 ```
